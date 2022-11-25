@@ -1,6 +1,4 @@
-
 const videoElement = document.getElementById('input_video');
-
 
 let landmarks;
 let jab_stage;
@@ -10,25 +8,21 @@ let straight_stage;
 let straight_counter = 0;
 let off_vs_def_text;
 
+function calculate_angle(a, b, c) {
+    let radians = Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
+    let angle = Math.abs(radians * 180.0 / Math.PI)
 
-
+    if (angle > 180.0) {
+        angle = 360 - angle;
+    }
+    return angle
+}
 
 function onResults(results) {
     if (!results.poseLandmarks) {
-        grid.updateLandmarks([]);
+        console.log("this hit")
         return;
     }
-
-    function calculate_angle(a, b, c) {
-        let radians = Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
-        let angle = Math.abs(radians * 180.0 / Math.PI)
-
-        if (angle > 180.0) {
-            angle = 360 - angle;
-        }
-        return angle
-    }
-
 
     let r_wrist = [(results.poseLandmarks[16].x), (results.poseLandmarks[16].y)];
     let l_wrist = [(results.poseLandmarks[15].x), (results.poseLandmarks[15].y)];
