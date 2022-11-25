@@ -57,6 +57,8 @@ function onResults(results) {
         return true
     }
 
+    checkIfVisible(neededVisibilityPoints)
+
     // get angles
     angle_left_elbow = calculate_angle(l_shoulder, l_elbow, l_wrist)
     angle_right_elbow = calculate_angle(r_shoulder, r_elbow, r_wrist)
