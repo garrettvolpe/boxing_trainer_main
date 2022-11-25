@@ -1,3 +1,8 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
 html {
     background-image: url(maybe.jpg);
     -webkit-background-size: cover;
@@ -8,20 +13,16 @@ html {
     background-position: center;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-
-
-}
 
 h2 {
     font-size: 64px;
-    color: wheat
+    color: wheat margin: 0;
+    padding: 0;
 }
 
 .infoLine {
     display: flex;
+    padding-bottom: 2em;
 }
 
 .info {
@@ -32,12 +33,14 @@ h2 {
 .cam-container {
     display: flex;
     justify-content: center;
+
 }
 
 #input_video {
     width: 70vw;
     border-radius: 8%;
     visibility: hidden;
+
 
 }
 
@@ -50,6 +53,12 @@ h2 {
 
     #input_video {
         width: 90vw
+    }
+
+    #landmarkVisibility {
+        font-size: 64px;
+        margin: 0;
+        padding: 0;
     }
 
 }
