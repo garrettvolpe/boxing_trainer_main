@@ -87,7 +87,7 @@ function onResults(results) {
     if (angle_left_elbow < 50 && angle_right_elbow < 50) {
         if (l_pinky[1] < l_mouth[1] && r_pinky[1] < r_mouth[1]) {
             off_vs_def_text = "Defense"
-            document.getElementById("input_video").style.border = "blue solid 30px"
+            document.getElementById("input_video").style.border = "rgba(25, 101, 255, 0.987) solid 30px"
         }
     }
     else if (angle_right_elbow > 110 || angle_left_elbow > 110) {

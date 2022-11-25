@@ -1,5 +1,5 @@
 html {
-    background-image: url(maybe2.jpg);
+    background-image: url(maybe.jpg);
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -17,6 +17,7 @@ body {
 
 h2 {
     font-size: 64px;
+    color: wheat
 }
 
 .infoLine {
