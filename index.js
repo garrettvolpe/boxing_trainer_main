@@ -1,4 +1,6 @@
 const videoElement = document.getElementById('input_video');
+const landmarkVisibility = document.getElementById('landmarkVisibility');
+const loading = document.getElementById("loading");
 
 let landmarks;
 let jab_stage;
@@ -38,6 +40,23 @@ function onResults(results) {
     let l_mouth = [(results.poseLandmarks[9].x), (results.poseLandmarks[9].y)];
     let r_mouth = [(results.poseLandmarks[10].x), (results.poseLandmarks[10].y)];
 
+    neededVisibilityPoints = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+
+    function checkIfVisible(points) {
+        for (let point of points) {
+            if (results.poseLandmarks[point].visibility > .4) {
+            }
+            else {
+                landmarkVisibility.innerHTML = "Please step back a bit and into frame!"
+                landmarkVisibility.style.backgroundColor = "Black"
+                landmarkVisibility.style.color = "red"
+                return false
+            }
+        }
+        landmarkVisibility.innerHTML = ""
+        return true
+    }
+
     // get angles
     angle_left_elbow = calculate_angle(l_shoulder, l_elbow, l_wrist)
     angle_right_elbow = calculate_angle(r_shoulder, r_elbow, r_wrist)
@@ -69,7 +88,7 @@ function onResults(results) {
         }
     }
     if (angle_right_elbow > 110 && straight_stage === "Defense") {
-        if (angle_rhip_rshoulder_rwrist > 70) {
+        if (angle_rhip_rshoulder_rwrist > 60) {
             if (angle_left_elbow < 40) {
                 if (stance == "Orthodox") {
                     straight_stage = "Offense"
@@ -96,9 +115,17 @@ function onResults(results) {
             document.getElementById("input_video").style.border = "red solid 30px"
         }
     }
+    else if (l_pinky[1] > l_mouth[1] || r_pinky[1] > r_mouth[1]) {
+        document.getElementById("input_video").style.border = "none"
+    }
     else {
         document.getElementById("input_video").style.border = "none"
     }
+
+
+
+    loading.innerHTML = ''
+    videoElement.style.visibility = "visible"
 
 }
 
