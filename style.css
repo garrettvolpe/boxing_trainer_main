@@ -28,12 +28,18 @@ h2 {
 .info {
     display: flex;
     justify-content: space-evenly;
+    visibility: hidden;
 }
 
 .cam-container {
     display: flex;
     justify-content: center;
+}
 
+#loading {
+    font-size: 100px;
+    color: white;
+    background-color: black;
 }
 
 #input_video {

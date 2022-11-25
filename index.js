@@ -1,6 +1,7 @@
 const videoElement = document.getElementById('input_video');
 const landmarkVisibility = document.getElementById('landmarkVisibility');
 const loading = document.getElementById("loading");
+const info = document.getElementById("info");
 
 let landmarks;
 let jab_stage;
@@ -128,6 +129,7 @@ function onResults(results) {
 
     loading.innerHTML = ''
     videoElement.style.visibility = "visible"
+    info.style.visibility = "visible"
 
 }
 
