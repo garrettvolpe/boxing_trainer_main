@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(227, 227, 233);
+}
+
+h2 {
+    font-size: 64px;
+}
+
+.infoLine {
+    display: flex;
+}
+
+.info {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+@media only screen and (max-width: 1080px) {
+
+    h2 {
+        color: green;
+    }
+
+}
