@@ -33,6 +33,18 @@ h2 {
     visibility: hidden;
 }
 
+#comboInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.correctAndIncorrect {
+    display: flex;
+    gap: 10vw;
+    border: red solid 2px;
+    justify-content: space-evenly
+}
+
 .cam-container {
     display: flex;
     justify-content: center;
@@ -51,6 +63,10 @@ h2 {
 
 }
 
+.bigFont {
+    font-size: 8em;
+}
+
 @media only screen and (max-width: 1080px) {
 
     h2 {
@@ -65,6 +81,10 @@ h2 {
         font-size: 64px;
         margin: 0;
         padding: 0;
+    }
+
+    .bigFont {
+        font-size: 10em;
     }
 
 }

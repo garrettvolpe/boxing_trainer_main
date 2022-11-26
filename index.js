@@ -7,6 +7,7 @@ const gameInfo = document.getElementById("gameInfo");
 const displayCombo = document.getElementById("combo");
 const displayNumCorrect = document.getElementById("numCorrect");
 const displayNumIncorrect = document.getElementById("numIncorrect");
+const comboInfo = document.getElementById("comboInfo");
 
 let landmarks;
 let jab_stage;
@@ -41,6 +42,7 @@ let numberOfIncorrect = 0
 
 playGameButton.addEventListener('click', () => {
     gameInfo.style.visibility = "visible"
+    comboInfo.style.visibility = "visible"
     frameCounter = 0;
     gameOn = true
 })
@@ -108,7 +110,7 @@ function onResults(results) {
 
 
     // left punch logic 
-    if (angle_left_elbow < 60) {
+    if (angle_left_elbow < 70) {
         if (l_pinky[1] < l_shoulder[1]) {
             jab_stage = "Defense"
         }
@@ -126,7 +128,7 @@ function onResults(results) {
     }
 
     // right punch logic 
-    if (angle_right_elbow < 60) {
+    if (angle_right_elbow < 70) {
         if (r_pinky[1] < r_shoulder[1]) {
             straight_stage = "Defense"
         }
