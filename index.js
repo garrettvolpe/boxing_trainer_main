@@ -52,6 +52,7 @@ playGameButton.addEventListener('click', () => {
     }
     else {
         gameOn = true
+        playSound("correct")
         playGameButton.innerHTML = "End Game?"
         gameInfo.style.visibility = "visible"
         comboInfo.style.visibility = "visible"
