@@ -2,6 +2,7 @@ const videoElement = document.getElementById('input_video');
 const landmarkVisibility = document.getElementById('landmarkVisibility');
 const loading = document.getElementById("loading");
 const info = document.getElementById("info");
+const playGameButton = document.getElementById("playGame");
 
 let landmarks;
 let jab_stage;
@@ -11,6 +12,30 @@ let straight_stage;
 let straight_counter = 0;
 let off_vs_def_text;
 
+let globalStartTime;
+let startTime = ''
+let lastTime = startTime
+let endTime = ''
+let timeValue = ''
+let timeForCombo = ''
+let frameCounter = 0
+let randomFrameNumber = randomInteger(30, 60);
+let comboResetChecker = 1
+
+let combo = ''
+let combos = {
+    1: "1",
+    2: "2",
+    3: "1,2"
+}
+
+let numberOfCorrect = 0
+let numberOfIncorrect = 0
+
+
+playGameButton.addEventListener('click', timingGame)
+
+
 function calculate_angle(a, b, c) {
     let radians = Math.atan2(c[1] - b[1], c[0] - b[0]) - Math.atan2(a[1] - b[1], a[0] - b[0]);
     let angle = Math.abs(radians * 180.0 / Math.PI)
@@ -19,6 +44,10 @@ function calculate_angle(a, b, c) {
         angle = 360 - angle;
     }
     return angle
+}
+
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function onResults(results) {
@@ -156,3 +185,37 @@ const camera = new Camera(videoElement, {
     height: 720
 });
 camera.start();
+
+
+
+function timingGame(difficulty = 1) {
+    if (frameCounter < randomFrameNumber) {
+        // provide a combo
+        if (!combo) {
+            console.log(combo)
+            combo = combos[randomInteger(1, 3)]
+            console.log(combo)
+        }
+        // set start timer for the combo
+        if (combo && !startTime) {
+            startTime = new Date().getTime() / 1000
+        }
+    }
+    comboToLogic("1")
+}
+
+function comboToLogic(argument) {
+    switch (argument) {
+        case "1":
+            console.log("something");
+            break;
+        case "2":
+            console.log("somethign2")
+            break;
+        case "1,2":
+            console.log("somethign1,2")
+            break;
+        default:
+            console.log(`Sorry, not avaible`)
+    }
+}
