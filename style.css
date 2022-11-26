@@ -26,7 +26,8 @@ h2 {
     padding-bottom: 2em;
 }
 
-.info {
+.info,
+.gameInfo {
     display: flex;
     justify-content: space-evenly;
     visibility: hidden;

@@ -3,6 +3,10 @@ const landmarkVisibility = document.getElementById('landmarkVisibility');
 const loading = document.getElementById("loading");
 const info = document.getElementById("info");
 const playGameButton = document.getElementById("playGame");
+const gameInfo = document.getElementById("gameInfo");
+const displayCombo = document.getElementById("combo");
+const displayNumCorrect = document.getElementById("numCorrect");
+const displayNumIncorrect = document.getElementById("numIncorrect");
 
 let landmarks;
 let jab_stage;
@@ -12,15 +16,13 @@ let straight_stage;
 let straight_counter = 0;
 let off_vs_def_text;
 
+let gameOn = false
 let globalStartTime;
-let startTime = ''
-let lastTime = startTime
-let endTime = ''
-let timeValue = ''
-let timeForCombo = ''
+let startTime;
+let endTime;
+let timeForCombo;
 let frameCounter = 0
 let randomFrameNumber = randomInteger(30, 60);
-let comboResetChecker = 1
 
 let combo = ''
 let combos = {
@@ -29,11 +31,20 @@ let combos = {
     3: "1,2"
 }
 
+let jab_counter_for_game = 0;
+let straight_counter_for_game = 0;
+
+
 let numberOfCorrect = 0
 let numberOfIncorrect = 0
 
 
-playGameButton.addEventListener('click', timingGame)
+playGameButton.addEventListener('click', () => {
+    gameInfo.style.visibility = "visible"
+    frameCounter = 0;
+    gameOn = true
+})
+
 
 
 function calculate_angle(a, b, c) {
@@ -108,6 +119,7 @@ function onResults(results) {
                 if (stance == "Orthodox") {
                     jab_stage = "Offense"
                     jab_counter += 1
+                    jab_counter_for_game += 1
                 }
             }
         }
@@ -125,6 +137,7 @@ function onResults(results) {
                 if (stance == "Orthodox") {
                     straight_stage = "Offense"
                     straight_counter += 1
+                    straight_counter_for_game += 1
                 }
             }
         }
@@ -160,6 +173,11 @@ function onResults(results) {
     videoElement.style.visibility = "visible"
     info.style.visibility = "visible"
 
+    if (gameOn) {
+        timingGame()
+    }
+    frameCounter += 1
+
 }
 
 const pose = new Pose({
@@ -188,34 +206,65 @@ camera.start();
 
 
 
-function timingGame(difficulty = 1) {
-    if (frameCounter < randomFrameNumber) {
+function timingGame(difficulty = 2) {
+    if (frameCounter > randomFrameNumber) {
         // provide a combo
-        if (!combo) {
-            console.log(combo)
+        if (combo === '') {
             combo = combos[randomInteger(1, 3)]
-            console.log(combo)
+            displayCombo.innerHTML = combo
         }
         // set start timer for the combo
         if (combo && !startTime) {
             startTime = new Date().getTime() / 1000
         }
     }
-    comboToLogic("1")
+    if (comboToLogic(combo) === true) {
+        endTime = new Date().getTime() / 1000;
+        timeForCombo = Number(endTime - startTime).toFixed(2)
+        if (timeForCombo < difficulty) {
+            // play sound for win 
+            numberOfCorrect += 1
+            displayNumCorrect.innerHTML = numberOfCorrect
+        }
+        if (timeForCombo > difficulty) {
+            //    play sound for loss
+            numberOfIncorrect += 1
+            displayNumIncorrect.innerHTML = numberOfIncorrect
+
+
+        }
+        frameCounter = 0
+        combo = ''
+        displayCombo.innerHTML = combo
+        startTime = undefined
+        endTime = undefined
+        jab_counter_for_game = 0
+        straight_counter_for_game = 0
+        randomFrameNumber = randomInteger(30, 60);
+    }
 }
 
 function comboToLogic(argument) {
     switch (argument) {
         case "1":
-            console.log("something");
-            break;
+            if (jab_counter_for_game === 1 && !endTime) {
+                return true
+            }
         case "2":
-            console.log("somethign2")
-            break;
+            if (straight_counter_for_game === 1 && !endTime) {
+                return true
+            }
         case "1,2":
-            console.log("somethign1,2")
-            break;
+            if (jab_counter_for_game === 1 && straight_counter_for_game === 1 && !endTime) {
+                return true
+            }
+            if (jab_counter_for_game >= 2) {
+                jab_counter_for_game = 0
+            }
+            if (straight_counter_for_game >= 2) {
+                straight_counter_for_game = 0
+            }
         default:
-            console.log(`Sorry, not avaible`)
+            return false;
     }
 }
