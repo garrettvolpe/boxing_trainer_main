@@ -41,10 +41,19 @@ let numberOfIncorrect = 0
 
 
 playGameButton.addEventListener('click', () => {
-    gameInfo.style.visibility = "visible"
-    comboInfo.style.visibility = "visible"
     frameCounter = 0;
-    gameOn = true
+    if (gameOn) {
+        gameOn = false
+        playGameButton.innerHTML = "Play Game?"
+        gameInfo.style.visibility = "hidden"
+        comboInfo.style.visibility = "hidden"
+    }
+    else {
+        gameOn = true
+        playGameButton.innerHTML = "End Game?"
+        gameInfo.style.visibility = "visible"
+        comboInfo.style.visibility = "visible"
+    }
 })
 
 
