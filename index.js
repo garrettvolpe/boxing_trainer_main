@@ -23,7 +23,15 @@ let startTime;
 let endTime;
 let timeForCombo;
 let frameCounter = 0
-let randomFrameNumber = randomInteger(30, 60);
+let randomFrameNumber = 0;
+
+
+if (getWidth() < 1200) {
+    randomFrameNumber = randomInteger(15, 30);
+}
+else {
+    randomFrameNumber = randomInteger(30, 60);
+}
 
 let combo = ''
 let combos = {
@@ -317,5 +325,20 @@ function endGame() {
     endTime = undefined
     jab_counter_for_game = 0
     straight_counter_for_game = 0
-    randomFrameNumber = randomInteger(30, 60);
+    if (getWidth() < 1200) {
+        randomFrameNumber = randomInteger(15, 30);
+    }
+    else {
+        randomFrameNumber = randomInteger(30, 60);
+    }
+}
+
+function getWidth() {
+    return Math.max(
+        document.body.scrollWidth,
+        document.documentElement.scrollWidth,
+        document.body.offsetWidth,
+        document.documentElement.offsetWidth,
+        document.documentElement.clientWidth
+    );
 }
