@@ -99,7 +99,6 @@ function onResults(results) {
     let l_hip = [(results.poseLandmarks[23].x), (results.poseLandmarks[23].y)];
     let r_pinky = [(results.poseLandmarks[18].x), (results.poseLandmarks[18].y)];
     let l_pinky = [(results.poseLandmarks[17].x), (results.poseLandmarks[17].y)];
-    let nose = [(results.poseLandmarks[0].x), (results.poseLandmarks[0].y)];
     let l_mouth = [(results.poseLandmarks[9].x), (results.poseLandmarks[9].y)];
     let r_mouth = [(results.poseLandmarks[10].x), (results.poseLandmarks[10].y)];
 
@@ -177,10 +176,10 @@ function onResults(results) {
         }
     }
     else if (angle_right_elbow > 110 || angle_left_elbow > 110) {
-        if (angle_rhip_rshoulder_rwrist > 70 || angle_lhip_lshoulder_lwrist > 70) {
-            off_vs_def_text = "Offense"
-            document.getElementById("input_video").style.border = "red solid 30px"
-        }
+        // if (angle_rhip_rshoulder_rwrist > 70 || angle_lhip_lshoulder_lwrist > 70) {
+        off_vs_def_text = "Offense"
+        document.getElementById("input_video").style.border = "red solid 30px"
+        // }
     }
     else if (l_pinky[1] > l_mouth[1] || r_pinky[1] > r_mouth[1]) {
         document.getElementById("input_video").style.border = "none"
