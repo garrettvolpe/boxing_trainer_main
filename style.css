@@ -85,7 +85,7 @@ button:hover {
 @media only screen and (max-width: 1080px) {
 
     h2 {
-        color: green;
+        color: whitesmoke;
     }
 
     #input_video {
