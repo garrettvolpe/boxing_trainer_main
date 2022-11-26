@@ -217,6 +217,7 @@ function timingGame(difficulty = 2) {
         }
         // set start timer for the combo
         if (combo && !startTime) {
+            playSound(combo)
             startTime = new Date().getTime() / 1000
         }
     }
@@ -224,12 +225,12 @@ function timingGame(difficulty = 2) {
         endTime = new Date().getTime() / 1000;
         timeForCombo = Number(endTime - startTime).toFixed(2)
         if (timeForCombo < difficulty) {
-            // play sound for win 
+            playSound("correct")
             numberOfCorrect += 1
             displayNumCorrect.innerHTML = numberOfCorrect
         }
         if (timeForCombo > difficulty) {
-            //    play sound for loss
+            playSound("correct")
             numberOfIncorrect += 1
             displayNumIncorrect.innerHTML = numberOfIncorrect
 
@@ -268,5 +269,33 @@ function comboToLogic(argument) {
             }
         default:
             return false;
+    }
+}
+
+function playSound(combo) {
+    let audio
+    switch (combo) {
+        case "1":
+            audio = new Audio("jab.mp3");
+            audio.play();
+            break;
+        case "2":
+            audio = new Audio("cross.mp3");
+            audio.play();
+            break;
+        case "1,2":
+            audio = new Audio("12.mp3");
+            audio.play();
+            break;
+        case "correct":
+            audio = new Audio("correct.mp3");
+            audio.play();
+            break;
+        case "incorrect":
+            audio = new Audio("incorrect.mp3");
+            audio.play();
+            break;
+        default:
+            console.log("no audio")
     }
 }

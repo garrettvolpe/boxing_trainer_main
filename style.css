@@ -26,6 +26,20 @@ h2 {
     padding-bottom: 2em;
 }
 
+button {
+    height: 5em;
+    width: 10em;
+    font-size: 1.5em;
+    padding: 0px;
+    border-radius: 3em;
+}
+
+button:hover {
+    background-color: blue;
+    color: white;
+    border: white solid 3px
+}
+
 .info,
 .gameInfo {
     display: flex;
@@ -36,12 +50,12 @@ h2 {
 #comboInfo {
     display: flex;
     justify-content: center;
+    visibility: hidden;
 }
 
 .correctAndIncorrect {
     display: flex;
     gap: 10vw;
-    border: red solid 2px;
     justify-content: space-evenly
 }
 
