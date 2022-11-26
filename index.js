@@ -227,7 +227,10 @@ function timingGame(difficulty = 2) {
         if (combo === '') {
             combo = combos[randomInteger(1, 3)]
             displayCombo.innerHTML = combo
-            playSound(combo)
+            let myPromise = new Promise(function (res, rej) {
+                playSound(combo)
+                console.log("success")
+            })
         }
         // set start timer for the combo
         if (combo && !startTime) {
