@@ -47,12 +47,15 @@ playGameButton.addEventListener('click', () => {
         playGameButton.innerHTML = "Play Game?"
         gameInfo.style.visibility = "hidden"
         comboInfo.style.visibility = "hidden"
+        endGame();
+        videoElement.style.marginTop = "-12em";
     }
     else {
         gameOn = true
         playGameButton.innerHTML = "End Game?"
         gameInfo.style.visibility = "visible"
         comboInfo.style.visibility = "visible"
+        videoElement.style.marginTop = "0";
     }
 })
 
@@ -223,10 +226,10 @@ function timingGame(difficulty = 2) {
         if (combo === '') {
             combo = combos[randomInteger(1, 3)]
             displayCombo.innerHTML = combo
+            playSound(combo)
         }
         // set start timer for the combo
         if (combo && !startTime) {
-            playSound(combo)
             startTime = new Date().getTime() / 1000
         }
     }
@@ -245,14 +248,7 @@ function timingGame(difficulty = 2) {
 
 
         }
-        frameCounter = 0
-        combo = ''
-        displayCombo.innerHTML = combo
-        startTime = undefined
-        endTime = undefined
-        jab_counter_for_game = 0
-        straight_counter_for_game = 0
-        randomFrameNumber = randomInteger(30, 60);
+        endGame();
     }
 }
 
@@ -307,4 +303,15 @@ function playSound(combo) {
         default:
             console.log("no audio")
     }
+}
+
+function endGame() {
+    frameCounter = 0
+    combo = ''
+    displayCombo.innerHTML = combo
+    startTime = undefined
+    endTime = undefined
+    jab_counter_for_game = 0
+    straight_counter_for_game = 0
+    randomFrameNumber = randomInteger(30, 60);
 }
